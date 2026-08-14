@@ -1,0 +1,274 @@
+[
+    {
+        "Category": "Mittagsmenü",
+        "Note": null,
+        "Description": null,
+        "Price": null,
+        "Icon": null,
+        "Items": [
+          {
+            "Title": "M1. Gebratene Nudeln",
+            "Note": null,
+            "Description": null,
+            "Price": null,
+            "Icon": null,
+            "Options":
+            [
+                {
+                    "Label": "a. Tofu ",
+                    "Note": null,
+                    "Price": "10.90€"
+                },
+                {
+                    "Label": "b. Hühnerfleisch natur",
+                    "Note": null,
+                    "Price": "11.90€"
+                }
+            ]
+          },
+          {
+            "Title": "M2. Pad Thai",
+            "Note": null,
+            "Description": null,
+            "Price": null,
+            "Icon": null,
+            "Options":
+            [
+                {
+                    "Label": "a. Tofu",
+                    "Note": null,
+                    "Price": "11.90€"
+                },
+                {
+                    "Label": "b. Hühnerfleisch natur",
+                    "Note": null,
+                    "Price": "12.90€"
+                },
+                {
+                    "Label": "c. Rindfleisch",
+                    "Note": null,
+                    "Price": "13.90€"
+                }
+            ]
+          }
+        ]
+    },
+    {
+        "Category": "Gerichte mit Gemüse/Duftreis/Sesam serviert",
+        "Note": null,
+        "Description": null,
+        "Price": null,
+        "Icon": null,
+        "Items": [
+          {
+            "Title": "M3. Rote Curry",
+            "Note": null,
+            "Description": null,
+            "Price": null,
+            "Icon": null,
+            "Options":
+            [
+                {
+                    "Label": "a. Tofu",
+                    "Note": null,
+                    "Price": "11.90€"
+                },
+                {
+                    "Label": "b. Hühnerfleisch natur",
+                    "Note": null,
+                    "Price": "12.90€"
+                },
+                {
+                    "Label": "c. Rindfleisch",
+                    "Note": null,
+                    "Price": "13.90€"
+                }
+            ]
+          },
+          {
+            "Title": "M4. Erdnuss",
+            "Note": null,
+            "Description": null,
+            "Price": null,
+            "Icon": null,
+            "Options":
+            [
+                {
+                    "Label": "a. Tofu",
+                    "Note": null,
+                    "Price": "11.90€"
+                },
+                {
+                    "Label": "b. Hühnerfleisch natur",
+                    "Note": null,
+                    "Price": "12.90€"
+                },
+                {
+                    "Label": "c. Rindfleisch",
+                    "Note": null,
+                    "Price": "13.90€"
+                }
+            ]
+          },
+          {
+            "Title": "M5. Spezial Sauce",
+            "Note": null,
+            "Description": null,
+            "Price": null,
+            "Icon": null,
+            "Options":
+            [
+                {
+                    "Label": "a. Tofu",
+                    "Note": null,
+                    "Price": "11.90€"
+                },
+                {
+                    "Label": "b. Hühnerfleisch natur",
+                    "Note": null,
+                    "Price": "12.90€"
+                },
+                {
+                    "Label": "c. Rindfleisch",
+                    "Note": null,
+                    "Price": "13.90€"
+                }
+            ]
+          },
+          {
+            "Title": "M6. Süßsauer Sauce",
+            "Note": null,
+            "Description": null,
+            "Price": null,
+            "Icon": null,
+            "Options":
+            [
+                {
+                    "Label": "a. Tofu",
+                    "Note": null,
+                    "Price": "11.90€"
+                },
+                {
+                    "Label": "b. Hühnerfleisch natur",
+                    "Note": null,
+                    "Price": "12.90€"
+                }
+            ]
+          }
+        ]
+    },
+    {
+        "Category": "Sushi Lunch",
+        "Note": null,
+        "Description": "Sie erhalten gratis eine Miso Suppe Tofu zum hier speisen dazu",
+        "Price": null,
+        "Icon": null,
+        "Items": [
+          {
+            "Title": "S1. SET 1",
+            "Note": null,
+            "Description": null,
+            "Price": "12.50€",
+            "Icon": null,
+            "Options":
+            [
+                {
+                    "Label": "4 Kappa Maki, 4 Avocado Maki, 8 Sake Maki",
+                    "Note": null,
+                    "Price": null
+                }
+            ]
+          },
+          {
+            "Title": "S2. SET 2",
+            "Note": null,
+            "Description": null,
+            "Price": "13.50€",
+            "Icon": null,
+            "Options":
+            [
+                {
+                    "Label": "4 Sake Maki, 4 Thunfisch Maki, 5 Califonia I.O",
+                    "Note": null,
+                    "Price": null
+                }
+            ]
+          },
+          {
+            "Title": "S3. SET 3",
+            "Note": null,
+            "Description": null,
+            "Price": "14.50€",
+            "Icon": null,
+            "Options":
+            [
+                {
+                    "Label": "8 gebackene Salmon",
+                    "Note": null,
+                    "Price": null
+                }
+            ]
+          },
+          {
+            "Title": "S4. SET 4",
+            "Note": null,
+            "Description": null,
+            "Price": "15.00€",
+            "Icon": null,
+            "Options":
+            [
+                {
+                    "Label": "8 Kappa Maki, 4 Avocado Maki, 5 Buddha Rolls",
+                    "Note": null,
+                    "Price": null
+                }
+            ]
+          },
+          {
+            "Title": "S5. SET 5",
+            "Note": null,
+            "Description": null,
+            "Price": "15.50€",
+            "Icon": null,
+            "Options":
+            [
+                {
+                    "Label": "8 gebackene Tuna",
+                    "Note": null,
+                    "Price": null
+                }
+            ]
+          },
+          {
+            "Title": "S6. SET 6",
+            "Note": null,
+            "Description": null,
+            "Price": "15.50€",
+            "Icon": null,
+            "Options":
+            [
+                {
+                    "Label": "4 Salmon Crunchy, 5 Sake I.O, 2 Lachs Nigiri",
+                    "Note": null,
+                    "Price": null
+                }
+            ]
+          },
+          {
+            "Title": "S7. SET 7",
+            "Note": null,
+            "Description": null,
+            "Price": "17.50€",
+            "Icon": null,
+            "Options":
+            [
+                {
+                    "Label": "8Kappa Maki, 4 Salmon Crunchy, 5 Lachs Rucola  Spezial Rolles",
+                    "Note": null,
+                    "Price": null
+                }
+            ]
+          }
+        ]
+    }
+]
