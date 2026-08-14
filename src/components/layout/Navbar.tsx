@@ -9,38 +9,34 @@ interface MenuCategory {
 
 const menuCategories: MenuCategory[] = [
     {
-        label: 'Vorspeise',
+        label: 'VORSPEISE',
         path: '/menu/vorspeise',
     },
     {
-        label: 'Mittagsmenü',
+        label: 'MITTAGSMENÜ',
         path: '/menu/mittagsmenue',
     },
     {
-        label: 'Hauptspeise',
+        label: 'HAUPTSPEISE',
         path: '/menu/hauptspeise',
     },
     {
-        label: 'Sushi',
+        label: 'SUSHI',
         path: '/menu/sushi',
     },
     {
-        label: 'Dessert',
+        label: 'DESSERT',
         path: '/menu/dessert',
     },
     {
-        label: 'Drinks',
+        label: 'DRINKS',
         path: '/menu/drinks',
     },
 ];
 
 const navigationItems = [
     {
-        label: 'Home',
-        path: '/',
-    },
-    {
-        label: 'Über uns',
+        label: 'Einführen',
         path: '/about',
     },
     {
@@ -86,9 +82,7 @@ export default function Navbar() {
 
     return (
         <header
-            className={`
-        fixed inset-x-0 top-0 z-50
-        transition-all duration-500
+            className={` fixed inset-x-0 top-0 z-50 transition-all duration-500
         ${
             isScrolled
                 ? 'bg-black/90 shadow-lg backdrop-blur-md'
@@ -107,14 +101,7 @@ export default function Navbar() {
                     <img
                         src={smallLogo}
                         alt="Kazoku Restaurant"
-                        className="
-              h-16
-              w-16
-              object-contain
-              transition-transform
-              duration-300
-              hover:scale-105
-            "
+                        className="h-16 w-16 object-contain transition-transform duration-300 hover:scale-105"
                     />
                 </Link>
 
@@ -138,20 +125,7 @@ export default function Navbar() {
                             >
                                 <Link
                                     to={item.path}
-                                    className="
-                    flex
-                    items-center
-                    gap-1.5
-                    py-9
-                    text-[13px]
-                    font-medium
-                    uppercase
-                    tracking-[0.14em]
-                    text-white
-                    transition
-                    duration-300
-                    hover:text-red-400
-                  "
+                                    className="flex items-center gap-1.5 py-9 text-[13px] font-medium uppercase tracking-[0.14em] text-white transition duration-300 hover:text-red-400"
                                 >
                                     {item.label}
 
@@ -174,21 +148,7 @@ export default function Navbar() {
 
                                 {/* Desktop Dropdown */}
                                 {item.hasDropdown && isMenuOpen && (
-                                    <div
-                                        className="
-                      absolute
-                      left-1/2
-                      top-full
-                      w-56
-                      -translate-x-1/2
-                      border-t-2
-                      border-red-600
-                      bg-black/95
-                      py-3
-                      shadow-xl
-                      backdrop-blur-md
-                    "
-                                    >
+                                    <div className="absolute left-1/2 top-full  w-56 -translate-x-1/2 border-t-2 border-red-600 bg-black/95 py-3 shadow-xl backdrop-blur-md">
                                         {menuCategories.map((category) => (
                                             <Link
                                                 key={category.path}
@@ -196,20 +156,7 @@ export default function Navbar() {
                                                 onClick={() =>
                                                     setIsMenuOpen(false)
                                                 }
-                                                className="
-                          block
-                          px-6
-                          py-3
-                          text-xs
-                          font-medium
-                          uppercase
-                          tracking-[0.1em]
-                          text-white/80
-                          transition
-                          duration-200
-                          hover:bg-white/10
-                          hover:text-red-400
-                        "
+                                                className="block px-6 py-3 text-xs font-medium uppercase tracking-[0.1em] text-white/80 transition duration-200 hover:bg-white/10 hover:text-red-400"
                                             >
                                                 {category.label}
                                             </Link>
@@ -222,26 +169,7 @@ export default function Navbar() {
                         {/* Phone */}
                         <a
                             href="tel:+4961192777979"
-                            className="
-                ml-2
-                flex
-                items-center
-                gap-2
-                border
-                border-white/70
-                px-5
-                py-2.5
-                text-xs
-                font-medium
-                uppercase
-                tracking-[0.1em]
-                text-white
-                transition
-                duration-300
-                hover:border-white
-                hover:bg-white
-                hover:text-black
-              "
+                            className="ml-2 flex items-center gap-2 border border-white/70 px-5 py-2.5 text-xs font-medium uppercase tracking-[0.1em] text-white transition duration-300 hover:border-white hover:bg-white hover:text-black"
                         >
                             <svg
                                 className="h-4 w-4"
@@ -252,17 +180,17 @@ export default function Navbar() {
                             >
                                 <path
                                     d="M22 16.92v3a2 2 0 0 1-2.18 2
-                  19.79 19.79 0 0 1-8.63-3.07
-                  19.5 19.5 0 0 1-6-6
-                  19.79 19.79 0 0 1-3.07-8.67
-                  A2 2 0 0 1 4.11 2h3
-                  a2 2 0 0 1 2 1.72
-                  12.84 12.84 0 0 0 .7 2.81
-                  2 2 0 0 1-.45 2.11L8.09 9.91
-                  a16 16 0 0 0 6 6l1.27-1.27
-                  a2 2 0 0 1 2.11-.45
-                  12.84 12.84 0 0 0 2.81.7
-                  A2 2 0 0 1 22 16.92z"
+                                    19.79 19.79 0 0 1-8.63-3.07
+                                    19.5 19.5 0 0 1-6-6
+                                    19.79 19.79 0 0 1-3.07-8.67
+                                    A2 2 0 0 1 4.11 2h3
+                                    a2 2 0 0 1 2 1.72
+                                    12.84 12.84 0 0 0 .7 2.81
+                                    2 2 0 0 1-.45 2.11L8.09 9.91
+                                    a16 16 0 0 0 6 6l1.27-1.27
+                                    a2 2 0 0 1 2.11-.45
+                                    12.84 12.84 0 0 0 2.81.7
+                                    A2 2 0 0 1 22 16.92z"
                                 />
                             </svg>
                             0611 92777979
@@ -278,15 +206,7 @@ export default function Navbar() {
                         isMobileMenuOpen ? 'Menü schließen' : 'Menü öffnen'
                     }
                     aria-expanded={isMobileMenuOpen}
-                    className="
-            flex
-            h-10
-            w-10
-            items-center
-            justify-center
-            text-white
-            md:hidden
-          "
+                    className="flex h-10 w-10 items-center justify-center text-white md:hidden"
                 >
                     {isMobileMenuOpen ? (
                         <svg
@@ -320,15 +240,7 @@ export default function Navbar() {
 
             {/* Mobile Navigation */}
             <div
-                className={`
-          overflow-hidden
-          bg-black/95
-          backdrop-blur-md
-          transition-all
-          duration-300
-          md:hidden
-          ${isMobileMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'}
-        `}
+                className={`overflow-hidden bg-black/95 backdrop-blur-md transition-all duration-300 md:hidden ${isMobileMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'}`}
             >
                 <div className="px-6 pb-8 pt-2">
                     {navigationItems.map((item) => (
@@ -341,15 +253,7 @@ export default function Navbar() {
                                             ? undefined
                                             : closeMobileMenu
                                     }
-                                    className="
-                    flex-1
-                    py-4
-                    text-sm
-                    font-medium
-                    uppercase
-                    tracking-[0.12em]
-                    text-white
-                  "
+                                    className="flex-1 py-4 text-sm font-medium uppercase tracking-[0.12em] text-white"
                                 >
                                     {item.label}
                                 </Link>
@@ -364,13 +268,7 @@ export default function Navbar() {
                                         className="p-4 text-white"
                                     >
                                         <svg
-                                            className={`
-                        h-4
-                        w-4
-                        transition-transform
-                        duration-200
-                        ${isMenuOpen ? 'rotate-180' : ''}
-                      `}
+                                            className={`h-4 w-4 transition-transform duration-200 ${isMenuOpen ? 'rotate-180' : ''}`}
                                             viewBox="0 0 20 20"
                                             fill="none"
                                             stroke="currentColor"
@@ -393,19 +291,7 @@ export default function Navbar() {
                                             key={category.path}
                                             to={category.path}
                                             onClick={closeMobileMenu}
-                                            className="
-                        block
-                        border-b
-                        border-white/5
-                        px-6
-                        py-3
-                        text-xs
-                        uppercase
-                        tracking-[0.08em]
-                        text-white/70
-                        transition
-                        hover:text-red-400
-                      "
+                                            className="block border-b border-white/5 px-6 py-3 text-xs uppercase tracking-[0.08em] text-white/70 transition hover:text-red-400"
                                         >
                                             {category.label}
                                         </Link>
@@ -419,25 +305,7 @@ export default function Navbar() {
                     <a
                         href="tel:+4961192777979"
                         onClick={closeMobileMenu}
-                        className="
-              mt-6
-              flex
-              items-center
-              justify-center
-              gap-2
-              border
-              border-white
-              px-5
-              py-3.5
-              text-xs
-              font-medium
-              uppercase
-              tracking-[0.1em]
-              text-white
-              transition
-              hover:bg-white
-              hover:text-black
-            "
+                        className="mt-6 flex items-center justify-center gap-2 border border-white px-5 py-3.5 text-xs font-medium uppercase tracking-[0.1em] text-white transition hover:bg-white hover:text-black"
                     >
                         <svg
                             className="h-4 w-4"
@@ -448,17 +316,17 @@ export default function Navbar() {
                         >
                             <path
                                 d="M22 16.92v3a2 2 0 0 1-2.18 2
-                19.79 19.79 0 0 1-8.63-3.07
-                19.5 19.5 0 0 1-6-6
-                19.79 19.79 0 0 1-3.07-8.67
-                A2 2 0 0 1 4.11 2h3
-                a2 2 0 0 1 2 1.72
-                12.84 12.84 0 0 1 .7 2.81
-                2 2 0 0 1-.45 2.11L8.09 9.91
-                a16 16 0 0 0 6 6l1.27-1.27
-                a2 2 0 0 1 2.11-.45
-                12.84 12.84 0 0 0 2.81.7
-                A2 2 0 0 1 22 16.92z"
+                                19.79 19.79 0 0 1-8.63-3.07
+                                19.5 19.5 0 0 1-6-6
+                                19.79 19.79 0 0 1-3.07-8.67
+                                A2 2 0 0 1 4.11 2h3
+                                a2 2 0 0 1 2 1.72
+                                12.84 12.84 0 0 1 .7 2.81
+                                2 2 0 0 1-.45 2.11L8.09 9.91
+                                a16 16 0 0 0 6 6l1.27-1.27
+                                a2 2 0 0 1 2.11-.45
+                                12.84 12.84 0 0 0 2.81.7
+                                A2 2 0 0 1 22 16.92z"
                             />
                         </svg>
                         0611 92777979

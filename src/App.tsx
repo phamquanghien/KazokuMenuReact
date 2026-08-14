@@ -1,15 +1,6 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
-
-function Home() {
-    return (
-        <main className="pt-20">
-            <section className="flex min-h-screen items-center justify-center">
-                <h1 className="text-5xl font-light tracking-widest">KAZOKU</h1>
-            </section>
-        </main>
-    );
-}
+import Home from './pages/Home';
 
 function App() {
     return (
