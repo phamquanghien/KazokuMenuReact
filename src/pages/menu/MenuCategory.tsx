@@ -1,28 +1,37 @@
 import { Link, useParams } from 'react-router-dom';
 import { menuCategories } from '../../data/menuCategories';
 import MenuGroup from '../../components/menu/MenuGroup';
+import { ArrowLeft, UtensilsCrossed } from 'lucide-react';
 
 export default function MenuCategory() {
     const { category } = useParams<{ category: string }>();
 
     const activeCategory = menuCategories.find((item) => item.id === category);
 
+    // Trang 404 khi không tìm thấy danh mục
     if (!activeCategory) {
         return (
-            <main className="flex min-h-screen items-center justify-center bg-white px-6 text-zinc-900">
-                <div className="text-center">
-                    <p className="text-xs uppercase tracking-[0.3em] text-zinc-400">
-                        KAZOKU Restaurant
-                    </p>
+            <main className="relative flex min-h-screen items-center justify-center bg-zinc-950 px-6 text-zinc-100 selection:bg-amber-500 selection:text-black">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-amber-500/10 rounded-full blur-[128px] pointer-events-none" />
 
-                    <h1 className="mt-4 text-2xl font-light uppercase tracking-wider">
+                <div className="relative text-center">
+                    <span className="text-xs font-semibold uppercase tracking-[0.35em] text-amber-500">
+                        KAZOKU Restaurant
+                    </span>
+
+                    <h1 className="mt-4 text-3xl font-light uppercase tracking-wider text-zinc-100 sm:text-4xl">
                         Speisekarte nicht gefunden
                     </h1>
 
+                    <p className="mt-2 text-sm text-zinc-400">
+                        Die von Ihnen gesuchte Kategorie existiert leider nicht.
+                    </p>
+
                     <Link
                         to="/menu"
-                        className="mt-8 inline-block border border-zinc-900 px-6 py-3 text-xs uppercase tracking-[0.2em] transition hover:bg-zinc-900 hover:text-white"
+                        className="mt-8 inline-flex items-center gap-2 rounded-xl bg-amber-500 px-8 py-3.5 text-xs font-bold uppercase tracking-[0.2em] text-black shadow-lg shadow-amber-500/10 transition-all duration-300 hover:bg-amber-400 hover:shadow-amber-500/20 active:scale-[0.98]"
                     >
+                        <ArrowLeft size={16} />
                         Zur Speisekarte
                     </Link>
                 </div>
@@ -31,35 +40,45 @@ export default function MenuCategory() {
     }
 
     return (
-        <main className="min-h-screen bg-white text-zinc-900">
-            {/* Header */}
-            <header className="px-6 pb-12 pt-32 sm:px-10 lg:pb-16">
+        <main className="min-h-screen bg-zinc-950 text-zinc-100 selection:bg-amber-500 selection:text-black">
+            {/* Ambient Background Glow */}
+            <div className="fixed inset-0 pointer-events-none overflow-hidden">
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[350px] bg-amber-500/5 blur-[160px] rounded-full" />
+            </div>
+
+            {/* Header Section */}
+            <header className="relative px-6 pb-12 pt-32 sm:px-10 lg:pb-16 lg:pt-40">
                 <div className="mx-auto max-w-5xl">
+                    {/* Back Button */}
                     <Link
                         to="/menu"
-                        className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-zinc-500 transition hover:text-zinc-900"
+                        className="group inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.2em] text-zinc-400 transition-colors hover:text-amber-400"
                     >
-                        <span>←</span>
-                        <span>Speisekarte</span>
+                        <ArrowLeft
+                            size={16}
+                            className="transition-transform duration-300 group-hover:-translate-x-1"
+                        />
+                        <span>Zurück zur Übersicht</span>
                     </Link>
 
-                    <div className="mt-12 text-center">
-                        <p className="text-xs font-medium uppercase tracking-[0.35em] text-zinc-400">
+                    <div className="mt-10 text-center">
+                        <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/20 bg-amber-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.3em] text-amber-400">
+                            <UtensilsCrossed size={14} />
                             KAZOKU Restaurant
-                        </p>
+                        </div>
 
-                        <h1 className="mt-4 text-4xl font-light uppercase tracking-[0.18em] sm:text-5xl lg:text-6xl">
+                        <h1 className="mt-6 text-4xl font-light uppercase tracking-[0.2em] sm:text-5xl lg:text-6xl text-zinc-100">
                             {activeCategory.label}
                         </h1>
 
-                        <div className="mx-auto mt-6 h-px w-16 bg-zinc-900" />
+                        <div className="mx-auto mt-6 h-0.5 w-16 bg-gradient-to-r from-transparent via-amber-500 to-transparent" />
                     </div>
                 </div>
             </header>
 
-            {/* Category navigation */}
-            <nav className="border-y border-zinc-100">
-                <div className="mx-auto flex max-w-5xl overflow-x-auto px-6 sm:px-10">
+            {/* Category Sticky Navigation */}
+            <nav className="sticky top-0 z-30 border-y border-zinc-800/80 bg-zinc-950/80 backdrop-blur-md">
+                <div className="mx-auto flex max-w-5xl overflow-x-auto px-6 no-scrollbar sm:px-10">
                     {menuCategories.map((item) => {
                         const isActive = item.id === activeCategory.id;
 
@@ -68,49 +87,50 @@ export default function MenuCategory() {
                                 key={item.id}
                                 to={item.path}
                                 className={`
-                                    shrink-0
-                                    px-4
-                                    py-4
-                                    text-xs
-                                    uppercase
-                                    tracking-[0.15em]
-                                    transition-colors
-                                    sm:px-6
+                                    relative shrink-0 px-5 py-4 text-xs font-medium uppercase tracking-[0.18em] transition-all duration-300 sm:px-6
                                     ${
                                         isActive
-                                            ? 'border-b border-zinc-900 text-zinc-900'
-                                            : 'text-zinc-400 hover:text-zinc-900'
+                                            ? 'text-amber-400'
+                                            : 'text-zinc-400 hover:text-zinc-200'
                                     }
                                 `}
                             >
                                 {item.label}
+                                {isActive && (
+                                    <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-500 rounded-full shadow-[0_0_8px_rgba(245,158,11,0.8)]" />
+                                )}
                             </Link>
                         );
                     })}
                 </div>
             </nav>
 
-            {/* Menu */}
-            <section className="mx-auto max-w-5xl px-6 py-14 sm:px-10 sm:py-20">
+            {/* Menu Groups Section */}
+            <section className="relative mx-auto max-w-5xl px-6 py-14 sm:px-10 sm:py-20">
                 <div className="space-y-16">
                     {activeCategory.data.map((group, groupIndex) => (
-                        <MenuGroup
+                        <div
                             key={`${activeCategory.id}-${groupIndex}`}
-                            group={group}
-                            startIndex={groupIndex}
-                        />
+                            className="rounded-2xl border border-zinc-800/60 bg-zinc-900/30 p-6 sm:p-10 backdrop-blur-sm"
+                        >
+                            <MenuGroup group={group} startIndex={groupIndex} />
+                        </div>
                     ))}
                 </div>
             </section>
 
-            {/* Back */}
-            <div className="border-t border-zinc-100">
-                <div className="mx-auto max-w-5xl px-6 py-10 text-center sm:px-10">
+            {/* Back to Menu Footer CTA */}
+            <div className="border-t border-zinc-800/80 bg-zinc-900/20">
+                <div className="mx-auto max-w-5xl px-6 py-12 text-center sm:px-10">
                     <Link
                         to="/menu"
-                        className="inline-flex border border-zinc-900 px-8 py-3.5 text-xs uppercase tracking-[0.2em] transition hover:bg-zinc-900 hover:text-white"
+                        className="group relative inline-flex items-center gap-3 overflow-hidden rounded-xl border border-zinc-700/80 bg-zinc-800/40 px-8 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-zinc-200 transition-all duration-300 hover:border-amber-500 hover:bg-amber-500 hover:text-black shadow-lg"
                     >
-                        ← Gesamte Speisekarte
+                        <ArrowLeft
+                            size={16}
+                            className="transition-transform duration-300 group-hover:-translate-x-1"
+                        />
+                        <span>Gesamte Speisekarte</span>
                     </Link>
                 </div>
             </div>
