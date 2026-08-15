@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import smallLogo from '../../assets/images/small-logo.webp';
 
 interface MenuCategory {
@@ -8,46 +8,18 @@ interface MenuCategory {
 }
 
 const menuCategories: MenuCategory[] = [
-    {
-        label: 'VORSPEISE',
-        path: '/menu/vorspeise',
-    },
-    {
-        label: 'MITTAGSMENÜ',
-        path: '/menu/mittagsmenue',
-    },
-    {
-        label: 'HAUPTSPEISE',
-        path: '/menu/hauptspeise',
-    },
-    {
-        label: 'SUSHI',
-        path: '/menu/sushi',
-    },
-    {
-        label: 'DESSERT',
-        path: '/menu/dessert',
-    },
-    {
-        label: 'DRINKS',
-        path: '/menu/drinks',
-    },
+    { label: 'VORSPEISE', path: '/menu/vorspeise' },
+    { label: 'MITTAGSMENÜ', path: '/menu/mittagsmenue' },
+    { label: 'HAUPTSPEISE', path: '/menu/hauptspeise' },
+    { label: 'SUSHI', path: '/menu/sushi' },
+    { label: 'DESSERT', path: '/menu/dessert' },
+    { label: 'DRINKS', path: '/menu/drinks' },
 ];
 
 const navigationItems = [
-    {
-        label: 'Einführen',
-        path: '/about',
-    },
-    {
-        label: 'Speisekarte',
-        path: '/menu',
-        hasDropdown: true,
-    },
-    {
-        label: 'Adresse',
-        path: '/address',
-    },
+    { label: 'Einführen', href: '#about' },
+    { label: 'Speisekarte', href: '#menu', hasDropdown: true },
+    { label: 'Adresse', href: '#address' },
 ];
 
 export default function Navbar() {
@@ -55,46 +27,82 @@ export default function Navbar() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    // Lắng nghe sự kiện Scroll để đổi background Navbar
     useEffect(() => {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 40);
         };
 
         window.addEventListener('scroll', handleScroll);
-
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
+        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    // Khóa cuộn trang khi mở Mobile Menu
     useEffect(() => {
         document.body.style.overflow = isMobileMenuOpen ? 'hidden' : '';
-
         return () => {
             document.body.style.overflow = '';
         };
     }, [isMobileMenuOpen]);
+
+    // Tự động cuộn đến ID nếu vừa chuyển từ trang con về trang chủ kèm #hash
+    useEffect(() => {
+        if (location.pathname === '/' && location.hash) {
+            const targetId = location.hash.replace('#', '');
+            setTimeout(() => {
+                const element = document.getElementById(targetId);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                }
+            }, 100);
+        }
+    }, [location]);
 
     const closeMobileMenu = () => {
         setIsMobileMenuOpen(false);
         setIsMenuOpen(false);
     };
 
+    // Hàm xử lý cuộn trang mượt mà theo ID
+    const handleNavClick = (
+        e: React.MouseEvent<HTMLAnchorElement>,
+        href: string,
+    ) => {
+        closeMobileMenu();
+
+        if (href.startsWith('#')) {
+            e.preventDefault();
+            const targetId = href.replace('#', '');
+
+            if (location.pathname === '/') {
+                // Đang ở trang chủ -> Scroll mượt tới ID
+                const element = document.getElementById(targetId);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                }
+            } else {
+                // Đang ở trang con -> Quay về trang chủ kèm Hash URL
+                navigate(`/${href}`);
+            }
+        }
+    };
+
     return (
         <header
-            className={` fixed inset-x-0 top-0 z-50 transition-all duration-500
-        ${
-            isScrolled
-                ? 'bg-black/90 shadow-lg backdrop-blur-md'
-                : 'bg-gradient-to-b from-black/60 to-transparent'
-        }
-      `}
+            className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
+                isScrolled
+                    ? 'bg-black/90 shadow-lg backdrop-blur-md'
+                    : 'bg-gradient-to-b from-black/60 to-transparent'
+            }`}
         >
             <nav className="mx-auto flex h-24 max-w-7xl items-center justify-between px-6 lg:px-8">
                 {/* Logo */}
                 <Link
                     to="/"
-                    onClick={closeMobileMenu}
+                    onClick={(e) => handleNavClick(e, '#about')}
                     className="flex shrink-0 items-center"
                     aria-label="Kazoku Restaurant"
                 >
@@ -110,21 +118,20 @@ export default function Navbar() {
                     <div className="flex items-center gap-8">
                         {navigationItems.map((item) => (
                             <div
-                                key={item.path}
+                                key={item.href}
                                 className="relative"
                                 onMouseEnter={() => {
-                                    if (item.hasDropdown) {
-                                        setIsMenuOpen(true);
-                                    }
+                                    if (item.hasDropdown) setIsMenuOpen(true);
                                 }}
                                 onMouseLeave={() => {
-                                    if (item.hasDropdown) {
-                                        setIsMenuOpen(false);
-                                    }
+                                    if (item.hasDropdown) setIsMenuOpen(false);
                                 }}
                             >
-                                <Link
-                                    to={item.path}
+                                <a
+                                    href={item.href}
+                                    onClick={(e) =>
+                                        handleNavClick(e, item.href)
+                                    }
                                     className="flex items-center gap-1.5 py-9 text-[13px] font-medium uppercase tracking-[0.14em] text-white transition duration-300 hover:text-red-400"
                                 >
                                     {item.label}
@@ -144,11 +151,11 @@ export default function Navbar() {
                                             />
                                         </svg>
                                     )}
-                                </Link>
+                                </a>
 
                                 {/* Desktop Dropdown */}
                                 {item.hasDropdown && isMenuOpen && (
-                                    <div className="absolute left-1/2 top-full  w-56 -translate-x-1/2 border-t-2 border-red-600 bg-black/95 py-3 shadow-xl backdrop-blur-md">
+                                    <div className="absolute left-1/2 top-full w-56 -translate-x-1/2 border-t-2 border-red-600 bg-black/95 py-3 shadow-xl backdrop-blur-md">
                                         {menuCategories.map((category) => (
                                             <Link
                                                 key={category.path}
@@ -178,20 +185,7 @@ export default function Navbar() {
                                 stroke="currentColor"
                                 strokeWidth="1.6"
                             >
-                                <path
-                                    d="M22 16.92v3a2 2 0 0 1-2.18 2
-                                    19.79 19.79 0 0 1-8.63-3.07
-                                    19.5 19.5 0 0 1-6-6
-                                    19.79 19.79 0 0 1-3.07-8.67
-                                    A2 2 0 0 1 4.11 2h3
-                                    a2 2 0 0 1 2 1.72
-                                    12.84 12.84 0 0 0 .7 2.81
-                                    2 2 0 0 1-.45 2.11L8.09 9.91
-                                    a16 16 0 0 0 6 6l1.27-1.27
-                                    a2 2 0 0 1 2.11-.45
-                                    12.84 12.84 0 0 0 2.81.7
-                                    A2 2 0 0 1 22 16.92z"
-                                />
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67 A2 2 0 0 1 4.11 2h3 a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91 a16 16 0 0 0 6 6l1.27-1.27 a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7 A2 2 0 0 1 22 16.92z" />
                             </svg>
                             0611 92777979
                         </a>
@@ -240,23 +234,25 @@ export default function Navbar() {
 
             {/* Mobile Navigation */}
             <div
-                className={`overflow-hidden bg-black/95 backdrop-blur-md transition-all duration-300 md:hidden ${isMobileMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'}`}
+                className={`overflow-hidden bg-black/95 backdrop-blur-md transition-all duration-300 md:hidden ${
+                    isMobileMenuOpen
+                        ? 'max-h-screen opacity-100'
+                        : 'max-h-0 opacity-0'
+                }`}
             >
                 <div className="px-6 pb-8 pt-2">
                     {navigationItems.map((item) => (
-                        <div key={item.path}>
+                        <div key={item.href} className="relative">
                             <div className="flex items-center border-b border-white/10">
-                                <Link
-                                    to={item.path}
-                                    onClick={
-                                        item.hasDropdown
-                                            ? undefined
-                                            : closeMobileMenu
+                                <a
+                                    href={item.href}
+                                    onClick={(e) =>
+                                        handleNavClick(e, item.href)
                                     }
                                     className="flex-1 py-4 text-sm font-medium uppercase tracking-[0.12em] text-white"
                                 >
                                     {item.label}
-                                </Link>
+                                </a>
 
                                 {item.hasDropdown && (
                                     <button
@@ -268,7 +264,9 @@ export default function Navbar() {
                                         className="p-4 text-white"
                                     >
                                         <svg
-                                            className={`h-4 w-4 transition-transform duration-200 ${isMenuOpen ? 'rotate-180' : ''}`}
+                                            className={`h-4 w-4 transition-transform duration-200 ${
+                                                isMenuOpen ? 'rotate-180' : ''
+                                            }`}
                                             viewBox="0 0 20 20"
                                             fill="none"
                                             stroke="currentColor"
@@ -314,20 +312,7 @@ export default function Navbar() {
                             stroke="currentColor"
                             strokeWidth="1.6"
                         >
-                            <path
-                                d="M22 16.92v3a2 2 0 0 1-2.18 2
-                                19.79 19.79 0 0 1-8.63-3.07
-                                19.5 19.5 0 0 1-6-6
-                                19.79 19.79 0 0 1-3.07-8.67
-                                A2 2 0 0 1 4.11 2h3
-                                a2 2 0 0 1 2 1.72
-                                12.84 12.84 0 0 1 .7 2.81
-                                2 2 0 0 1-.45 2.11L8.09 9.91
-                                a16 16 0 0 0 6 6l1.27-1.27
-                                a2 2 0 0 1 2.11-.45
-                                12.84 12.84 0 0 0 2.81.7
-                                A2 2 0 0 1 22 16.92z"
-                            />
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67 A2 2 0 0 1 4.11 2h3 a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91 a16 16 0 0 0 6 6l1.27-1.27 a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7 A2 2 0 0 1 22 16.92z" />
                         </svg>
                         0611 92777979
                     </a>

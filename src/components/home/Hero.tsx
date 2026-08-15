@@ -4,7 +4,10 @@ import logo from '../../assets/images/logo.webp';
 
 export default function Hero() {
     return (
-        <section className="relative min-h-screen overflow-hidden bg-zinc-950 font-sans">
+        <section
+            id="about"
+            className="relative min-h-screen overflow-hidden bg-zinc-950 font-sans"
+        >
             {/* Background Image */}
             <div
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-1000 scale-105"
