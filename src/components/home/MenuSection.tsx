@@ -80,7 +80,7 @@ const menuCategories = [
     },
 ];
 
-export default function Menu() {
+export default function MenuSection() {
     // State lưu Tab đang chọn
     const [activeTab, setActiveTab] = useState('vorspeise');
 

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import backgroundImage from '../../assets/images/background.webp';
 import logo from '../../assets/images/logo.webp';
 
-export default function Hero() {
+export default function HeroSection() {
     return (
         <section
             id="about"
